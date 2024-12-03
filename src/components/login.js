@@ -41,8 +41,7 @@ const Login = () => {
                 </div>
                 <div className={"rounded-lg text-center w-full"}>
                     <a className={"text-black text-xs text-center"}>Еще нет учетной записи?</a>
-                    <button className={"bg-[#86EDA7] w-full my-4 p-1 rounded-lg"} type="submit">Зарегистрироваться
-                    </button>
+                    <button className={"bg-[#86EDA7] w-full my-4 p-1 rounded-lg"} type="submit">Зарегистрироваться</button>
                 </div>
             </form>
         </div>

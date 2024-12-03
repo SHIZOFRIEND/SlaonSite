@@ -1,4 +1,5 @@
 'use client'
+
 import React, {useEffect, useState} from 'react';
 const Alert = ({message, duration=3000}) => {
    const[visible, setVisible] = useState(true);
