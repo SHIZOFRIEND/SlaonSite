@@ -1,50 +1,81 @@
-'use client'
-import React,{useState} from 'react';
-import Alert from '@/components/alert'
-import {useRouter} from 'next/navigation'
-import Image from "next/image";
+'use client';
+import React, { useState } from 'react';
+import Alert from '@/components/alert';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import Button from '@/components/button';
+import InputField from '@/components/inputfield';
+import Switch from '@/components/switch';
+
 const Login = () => {
-   const [username, setUsername ] = useState('');
-   const [password, setPassword] = useState('');
-   const [alertMessage, setAlertMessage] = useState('');
-   const router = useRouter();
-   const handleSubmit = (e) => {
-       e.preventDefault();
-       if(username === 'Admin' && password === '') {
-           router.push('/mainContent');
-       }
-       else {
-           setAlertMessage('')
-           setTimeout(() => {
-               setAlertMessage('Данные плохие...')
-           },0)
-       }
-   };
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [alertMessage, setAlertMessage] = useState('');
+    const [isChecked, setIsChecked] = useState(false);
+    const router = useRouter();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (username === 'Admin' && password === 'pswrd') {
+            router.push('/mainContent');
+        } else {
+            setAlertMessage('Неверные данные');
+        }
+    };
     return (
-        <div>
+        <div className="min-h-screen flex items-center justify-center bg-gray-100">
             {alertMessage && <Alert message={alertMessage} duration={3000} />}
-            <form className={" min-h-1/3 min-w-1/3 p-6 rounded-lg"} onSubmit={handleSubmit}>
-                <Image className="mx-auto" src="/Resourses/logokrs.png" width={30} height={30} alt="Logo"/>
-                <h1 className={"rounded-lg text-center w-full"}>Авторизация </h1>
-                <div className={"w-full"}>
-                    <a className={"text-black mr-4"}>Логин:</a>
-                    <input className={"bg-white shadow-lg p-1 w-full border border-[#86EDA7] rounded-lg"} value={username} onChange={e => setUsername(e.target.value)}/>
+            <form
+                className="bg-white p-6 shadow-md rounded-lg max-w-sm w-full"
+                onSubmit={handleSubmit}>
+                <div className="text-center mb-6">
+                    <Image src="/Resourses/logokrs.png" width={60} height={60} alt="Logo" />
+                    <h1 className="text-2xl font-bold mt-4">Авторизация</h1>
                 </div>
-                <div className={"mt-6 w-full"}>
-                    <a className={"text-black mr-4"}>Пароль:</a>
-                    <input className={"bg-white shadow-lg p-1 w-full border border-[#86EDA7] rounded-lg"} value={password} onChange={e => setPassword(e.target.value)}/>
+                <div className="mb-4">
+                    <label className="block text-gray-700 mb-2">Логин:</label>
+                    <InputField
+                        type="text"
+                        className="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-green-300"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        placeholder="Введите логин"
+                        backgroundColor="white"
+                        textColor="gray-700"/>
                 </div>
-                <div className={"w-full"}>
-                    <button className={"bg-[#86EDA7] w-full my-4 p-1 rounded-lg"} type="submit">
-                        Войти
-                    </button>
+                <div className="mb-6">
+                    <label className="block text-gray-700 mb-2">Пароль:</label>
+                    <InputField
+                        type="password"
+                        className="w-full px-3 py-2 border rounded-lg shadow-sm focus:ring focus:ring-green-300"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Введите пароль"
+                        backgroundColor="white"
+                        textColor="gray-700"/>
                 </div>
-                <div className={"rounded-lg text-center w-full"}>
-                    <a className={"text-black text-xs text-center"}>Еще нет учетной записи?</a>
-                    <button className={"bg-[#86EDA7] w-full my-4 p-1 rounded-lg"} type="submit">Зарегистрироваться</button>
+                <div className="mb-6 flex items-center">
+                    <Switch
+                        text="Запомнить меня"
+                        isChecked={isChecked}
+                        onChange={() => setIsChecked(!isChecked)}
+                        backgroundColor="green-500"
+                        textColor="gray-700"
+                        className="ml-2"/>
                 </div>
+                <Button
+                    type="submit"
+                    backgroundColor="green-500"
+                    textColor="white"
+                    text="Войти"
+                    className="w-full py-2 px-4 rounded-lg shadow-md hover:bg-green-600 transition"/>
+                <p className="mt-4 text-center text-gray-600 text-sm">
+                    Еще нет учетной записи?{' '}
+                    <a href="/register" className="text-green-500 hover:underline">Зарегистрироваться</a>
+                </p>
             </form>
         </div>
     );
 };
+
 export default Login;

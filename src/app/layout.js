@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
     <html lang="ru">
     <body className={`${geistSans.variable} ${geistMono.variable} antialiased h-[calc(100vh)] flex flex-col`}>
     <Header/>
-    <main className="flex-grow flex justify-center bg-[url('/Resourses/back.png')] bg-cover bg-center">
+    <main className="h-screen flex-grow flex justify-center bg-[url('/Resourses/back.png')] bg-cover bg-center">
         {children}
     </main>
     <Footer/>
